@@ -1,0 +1,10 @@
+# Ignore PHP dependencies
+# Ignore sensitive configuration
+# Ignore logs
+# Ignore OS files
+
+/backend/vendor/
+/backend/config/config.php
+.env
+/backend/logs/*.log
+.DS_Store

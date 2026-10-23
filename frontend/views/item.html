@@ -1,0 +1,127 @@
+<section class="py-5">
+    <div class="container px-4 px-lg-5">
+        <nav aria-label="Breadcrumb" class="mb-4">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="#shop">Shop</a></li>
+                <li class="breadcrumb-item active" aria-current="page">Everyday Backpack</li>
+            </ol>
+        </nav>
+
+        <div class="row gx-5 gy-4 align-items-center mb-5">
+            <div class="col-lg-6">
+                <div id="itemImageCarousel" class="carousel slide" data-bs-ride="false">
+                    <div class="carousel-indicators">
+                        <button type="button" data-bs-target="#itemImageCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Photo 1"></button>
+                        <button type="button" data-bs-target="#itemImageCarousel" data-bs-slide-to="1" aria-label="Photo 2"></button>
+                        <button type="button" data-bs-target="#itemImageCarousel" data-bs-slide-to="2" aria-label="Photo 3"></button>
+                    </div>
+                    <div class="carousel-inner">
+                        <div class="carousel-item active">
+                            <img
+                                class="item-product-image"
+                                src="https://images.unsplash.com/photo-1553062407-98eeb64c6a62?auto=format&fit=crop&w=1200&q=85"
+                                alt="Everyday backpack in a natural outdoor setting"
+                            />
+                        </div>
+                        <div class="carousel-item">
+                            <img
+                                class="item-product-image"
+                                src="https://images.unsplash.com/photo-1622560480654-d96214fdc887?auto=format&fit=crop&w=1200&q=85"
+                                alt="Everyday backpack shown from another angle"
+                            />
+                        </div>
+                        <div class="carousel-item">
+                            <img
+                                class="item-product-image"
+                                src="https://images.unsplash.com/photo-1581605405669-fcdf81165afa?auto=format&fit=crop&w=1200&q=85"
+                                alt="Details of the everyday backpack"
+                            />
+                        </div>
+                    </div>
+                    <button class="carousel-control-prev" type="button" data-bs-target="#itemImageCarousel" data-bs-slide="prev">
+                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous photo</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#itemImageCarousel" data-bs-slide="next">
+                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next photo</span>
+                    </button>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <p class="text-uppercase text-muted fw-semibold small mb-2">Made for every day</p>
+                <h1 class="display-5 fw-bold mb-3">Everyday Backpack</h1>
+                <div class="d-flex align-items-center gap-2 mb-3">
+                    <span class="product-rating-stars" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</span>
+                    <span class="text-muted small">5.0 · 24 reviews</span>
+                </div>
+                <p class="fs-4 fw-semibold mb-3">$40.00 – $80.00</p>
+                <p class="item-product-description mb-4">
+                    A dependable, thoughtfully designed backpack for daily commutes and weekend escapes.
+                    Its roomy main compartment, comfortable straps, and timeless style make it easy to
+                    carry everything you need.
+                </p>
+                <div class="d-flex flex-wrap gap-3">
+                    <button class="btn btn-dark btn-lg" type="button">Add to cart</button>
+                    <a class="btn btn-outline-dark btn-lg" href="#shop">Continue shopping</a>
+                </div>
+            </div>
+        </div>
+
+        <section aria-labelledby="reviews-heading" class="mt-5">
+            <div class="row justify-content-center">
+                <div class="col-lg-9">
+                    <div class="d-flex flex-wrap justify-content-between align-items-end gap-2 mb-4">
+                        <div>
+                            <p class="text-uppercase text-muted fw-semibold small mb-1">Your thoughts matter</p>
+                            <h2 id="reviews-heading" class="h3 mb-0">Customer reviews</h2>
+                        </div>
+                        <span class="text-muted">24 reviews</span>
+                    </div>
+
+                    <div class="card item-review-card mb-4">
+                        <div class="card-body p-4 p-md-5">
+                            <h3 class="h5 mb-4">Write a review</h3>
+                            <form>
+                                <div class="mb-3">
+                                    <label class="form-label" for="reviewName">Your name</label>
+                                    <input class="form-control" id="reviewName" name="name" type="text" placeholder="Enter your name" />
+                                </div>
+                                <fieldset class="mb-3">
+                                    <legend class="form-label">Your rating</legend>
+                                    <div class="rating-choice" role="radiogroup" aria-label="Choose a star rating">
+                                        <input id="rating1" name="rating" type="radio" value="1" />
+                                        <label for="rating1" aria-label="1 star">★</label>
+                                        <input id="rating2" name="rating" type="radio" value="2" />
+                                        <label for="rating2" aria-label="2 stars">★</label>
+                                        <input id="rating3" name="rating" type="radio" value="3" />
+                                        <label for="rating3" aria-label="3 stars">★</label>
+                                        <input id="rating4" name="rating" type="radio" value="4" />
+                                        <label for="rating4" aria-label="4 stars">★</label>
+                                        <input id="rating5" name="rating" type="radio" value="5" checked />
+                                        <label for="rating5" aria-label="5 stars">★</label>
+                                    </div>
+                                </fieldset>
+                                <div class="mb-4">
+                                    <label class="form-label" for="reviewComment">Your review</label>
+                                    <textarea class="form-control" id="reviewComment" name="comment" rows="4" placeholder="What did you think of this product?"></textarea>
+                                </div>
+                                <button class="btn btn-dark px-4" type="button">Submit review</button>
+                                <p class="form-text mb-0 mt-2">Reviews are for display only in this frontend preview.</p>
+                            </form>
+                        </div>
+                    </div>
+
+                    <article class="border-bottom py-3">
+                        <div class="d-flex justify-content-between gap-3">
+                            <h3 class="h6 mb-1">Jordan M.</h3>
+                            <time class="text-muted small" datetime="2026-09-12">September 12, 2026</time>
+                        </div>
+                        <div class="product-rating-stars mb-2" role="img" aria-label="Rated 5 out of 5 stars">★★★★★</div>
+                        <p class="text-muted mb-0">Comfortable, roomy, and just the right size for everyday use.</p>
+                    </article>
+                </div>
+            </div>
+        </section>
+    </div>
+</section>

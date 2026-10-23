@@ -1,0 +1,85 @@
+<section class="py-5">
+    <div class="container px-4 px-lg-5">
+        <div class="row justify-content-center">
+            <div class="col-xl-9">
+                <div class="mb-4">
+                    <p class="text-uppercase text-muted fw-semibold small mb-1">Seller studio</p>
+                    <h1 class="display-6 fw-bold mb-2">Add an item</h1>
+                    <p class="text-muted mb-0">Share a few details and get your pre-loved piece ready for the shop.</p>
+                </div>
+
+                <form class="card seller-form-card">
+                    <div class="card-body p-4 p-lg-5">
+                        <h2 class="h5 mb-4">Item details</h2>
+                        <div class="row g-3">
+                            <div class="col-md-8">
+                                <label class="form-label" for="itemName">Item name</label>
+                                <input class="form-control" id="itemName" name="itemName" type="text" placeholder="e.g. Vintage denim jacket" required />
+                            </div>
+                            <div class="col-md-4">
+                                <label class="form-label" for="itemCategory">Category</label>
+                                <select class="form-select" id="itemCategory" name="category" required>
+                                    <option value="" selected disabled>Choose a category</option>
+                                    <option>Clothing</option>
+                                    <option>Shoes</option>
+                                    <option>Bags</option>
+                                    <option>Accessories</option>
+                                    <option>Home goods</option>
+                                    <option>Other</option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label" for="itemBrand">Brand <span class="text-muted">(optional)</span></label>
+                                <input class="form-control" id="itemBrand" name="brand" type="text" placeholder="Brand or maker" />
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label" for="itemSize">Size <span class="text-muted">(optional)</span></label>
+                                <input class="form-control" id="itemSize" name="size" type="text" placeholder="e.g. M, 38" />
+                            </div>
+                            <div class="col-md-3">
+                                <label class="form-label" for="itemCondition">Condition</label>
+                                <select class="form-select" id="itemCondition" name="condition" required>
+                                    <option value="" selected disabled>Choose</option>
+                                    <option>Like new</option>
+                                    <option>Very good</option>
+                                    <option>Good</option>
+                                    <option>Fair</option>
+                                </select>
+                            </div>
+                            <div class="col-12">
+                                <label class="form-label" for="itemDescription">Description</label>
+                                <textarea class="form-control" id="itemDescription" name="description" rows="5" placeholder="Describe the item, fit, materials, and any signs of wear." required></textarea>
+                            </div>
+                        </div>
+
+                        <hr class="my-4" />
+                        <h2 class="h5 mb-4">Price and photos</h2>
+                        <div class="row g-3">
+                            <div class="col-md-4">
+                                <label class="form-label" for="itemPrice">Price (BAM)</label>
+                                <div class="input-group">
+                                    <span class="input-group-text">KM</span>
+                                    <input class="form-control" id="itemPrice" name="price" type="number" min="0.01" step="0.01" placeholder="0.00" required />
+                                </div>
+                            </div>
+                            <div class="col-md-8">
+                                <label class="form-label" for="itemPhotos">Item photos</label>
+                                <input class="form-control" id="itemPhotos" name="photos" type="file" accept="image/*" multiple />
+                                <div class="form-text">Add clear photos from different angles. You can select more than one.</div>
+                            </div>
+                        </div>
+
+                        <div class="alert alert-light border mt-4 mb-0" role="note">
+                            <i class="fas fa-info-circle text-primary me-2" aria-hidden="true"></i>
+                            This frontend form is a design preview. Listings are not uploaded or saved yet.
+                        </div>
+                        <div class="d-flex flex-wrap gap-2 mt-4">
+                            <button class="btn btn-dark px-4" type="button">Preview listing</button>
+                            <a class="btn btn-outline-secondary" href="#shop">Cancel</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
