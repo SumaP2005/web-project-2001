@@ -15,7 +15,7 @@ You can also open `frontend/index.html` directly in a browser. The app is curren
 - `frontend/index.html` - application shell and navigation
 - `frontend/views/` - shop, account, dashboard, and other routed pages
 - `frontend/assets/` and `frontend/js/` - styles, images, and browser scripts
-- `backend/` - reserved for future backend work
+- `backend/` - PHP DAO layer for the database entities
 - `docs/AI_LOG.md` - AI usage and Milestone 1 notes, including the proposed database schema
 
 ## Database, ERD
@@ -36,4 +36,9 @@ The **Bosnian Thrift Shop** database is designed with 6 core relational entities
 * **`item_images`**: Stores references/paths to product photographs, enabling multi-image listings.
 * **`orders`**: Keeps a log of financial transactions and buyer history.
 * **`reviews`**: Stores scoring feedback (1-5) and buyer commentary.
+
+The DAO classes are in `backend/rest/dao/` and use prepared statements through
+`BaseDao`. Configure database access in the ignored `backend/config/config.php`
+file (copy `backend/config/config.example.php` and adjust the values); do not
+commit the local configuration file.
 <img src="docs/images/erd.png" alt="ER Diagram" width="500">
