@@ -2,7 +2,7 @@
 
 ## Project
 
-Bosnian Thrift Shop is a static frontend prototype for a second-hand marketplace. It includes a shop, product details and reviews, account pages, and a seller listing form. The current milestone has no application backend or implemented database.
+Bosnian Thrift Shop is a second-hand marketplace prototype with a static frontend and a PHP/MySQL data-access layer. It includes a shop, product details and reviews, account pages, and a seller listing form. The frontend is not connected to the backend.
 
 ## Technology Stack
 
@@ -18,8 +18,12 @@ Bosnian Thrift Shop is a static frontend prototype for a second-hand marketplace
 - `frontend/views/` contains route-loaded HTML fragments. Add a matching section to `index.html` and route in `frontend/js/router.js` for each new view.
 - `frontend/js/` contains routing and small frontend behaviors. Keep UI logic browser-only unless backend functionality is explicitly requested.
 - `frontend/assets/css/styles.css` is the Bootstrap template stylesheet. Put project-specific presentation in `frontend/assets/css/shop.css`.
-- `backend/` is reserved for future server-side code; it is currently only a placeholder.
-- `docs/AI_LOG.md` records milestone-level AI usage, prompts, mistakes, and corrections. The proposed database structure is documented there and is not implemented.
+- `backend/` contains the PHP database configuration and DAO layer. The current backend has no HTTP API or frontend integration.
+- `database/web_project.sql` defines and seeds the MySQL `web_project` database; note that importing it drops an existing database with that name.
+- `backend/rest/dao/BaseDao.php` provides the shared PDO connection and reusable query helpers. Do not modify it without an explicit request; each entity DAO extends it directly and uses its table's actual primary-key name.
+- `backend/rest/dao/` contains CRUD DAOs for users, categories, items, item images, orders, and reviews, plus `test.php`, a database-backed example that prints DAO return values and removes its temporary records.
+- `backend/config/config.php` is a local ignored file. Configure connection values there or through `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD` environment variables; never commit local credentials.
+- `docs/AI_LOG.md` records milestone-level AI usage, prompts, mistakes, and corrections.
 
 ## Conventions
 
@@ -34,4 +38,5 @@ Bosnian Thrift Shop is a static frontend prototype for a second-hand marketplace
 ## Running and Validation
 
 - Preview with XAMPP/Apache at `http://localhost/web_project/frontend/index.html`, or open `frontend/index.html` directly in a browser.
-- There is no configured build or test suite. For UI changes, verify the affected SPApp route and its navigation in a browser.
+- To view DAO output, import `database/web_project.sql` into a disposable local MySQL database, configure `backend/config/config.php`, and run `php backend/rest/dao/test.php`. The script prints CRUD/query results (with password fields redacted) and removes its temporary records; it does not assert expected values. The SQL script drops and recreates `web_project`; protect any data you need before importing.
+- There is no configured frontend build or test suite. For UI changes, verify the affected SPApp route and its navigation in a browser.

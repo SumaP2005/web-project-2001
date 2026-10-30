@@ -1,6 +1,6 @@
 # Bosnian Thrift Shop
 
-Bosnian Thrift Shop is a static frontend prototype for a second-hand marketplace. Browse thrifted products, view item details and reviews, manage a profile, and explore the seller listing form.
+Bosnian Thrift Shop is a second-hand marketplace prototype. The frontend is static and browser-only; the PHP backend currently provides a database connection and a DAO layer, but no HTTP API or frontend-to-backend integration.
 
 ## Run locally
 
@@ -8,18 +8,34 @@ With this repository in XAMPP's `htdocs` folder, start Apache and open:
 
 `http://localhost/web_project/frontend/index.html`
 
-You can also open `frontend/index.html` directly in a browser. The app is currently a frontend-only prototype: account details are stored only in the current browser, and item listings and reviews are not submitted to a server.
+You can also open `frontend/index.html` directly in a browser. Account details are stored only in the current browser, and item listings and reviews are not submitted to the backend.
 
 ## Project structure
 
 - `frontend/index.html` - application shell and navigation
 - `frontend/views/` - shop, account, dashboard, and other routed pages
 - `frontend/assets/` and `frontend/js/` - styles, images, and browser scripts
-- `backend/` - PHP DAO layer for the database entities
-- `docs/AI_LOG.md` - AI usage and Milestone 1 notes, including the proposed database schema
+- `backend/` - PHP database configuration and DAO layer
+- `database/web_project.sql` - MySQL schema and sample seed data
+- `docs/AI_LOG.md` - AI usage notes for Milestones 1 and 2
 
-## Database, ERD
-The **Bosnian Thrift Shop** database is designed with 6 core relational entities to support user role management, catalog categorization, item management with multiple photo galleries, purchasing, and user feedback.
+## Milestone 2: Database and DAOs
+
+The MySQL schema and sample data are in [`database/web_project.sql`](database/web_project.sql). Import this script into a local MySQL development instance to create and seed the `web_project` database. **The script begins by dropping the existing `web_project` database; back up any data you need before importing it.**
+
+Set database connection values in `backend/config/config.php` or the `DB_HOST`, `DB_PORT`, `DB_NAME`, `DB_USER`, and `DB_PASSWORD` environment variables. The local configuration file is ignored by Git; copy [`backend/config/config.example.php`](backend/config/config.example.php) as a starting point and adjust it for your MySQL setup. The configured database account must have access to `web_project`.
+
+The DAOs in `backend/rest/dao/` provide prepared-statement CRUD operations for users, categories, items, item images, orders, and reviews. Each entity DAO extends `BaseDao` directly and communicates with the database only; HTTP endpoints and application validation belong outside this layer.
+
+After importing the schema and configuring the connection, run the integration test from the repository root:
+
+```sh
+php backend/rest/dao/test.php
+```
+
+The script prints the return values from the six DAOs' CRUD and entity-specific read methods, then removes the linked temporary records. Password fields are redacted in printed results. It is an output example, not an assertion-based test. Database errors are reported by PHP/PDO rather than hidden.
+
+## Database design
 
 ### Entity-Relationship Overview & Photo Support
 1. **Users (`1` to `N`) Items**: A user (seller/admin) can list multiple thrift items, but each item belongs to a single seller.
@@ -37,8 +53,4 @@ The **Bosnian Thrift Shop** database is designed with 6 core relational entities
 * **`orders`**: Keeps a log of financial transactions and buyer history.
 * **`reviews`**: Stores scoring feedback (1-5) and buyer commentary.
 
-The DAO classes are in `backend/rest/dao/` and use prepared statements through
-`BaseDao`. Configure database access in the ignored `backend/config/config.php`
-file (copy `backend/config/config.example.php` and adjust the values); do not
-commit the local configuration file.
 <img src="docs/images/erd.png" alt="ER Diagram" width="500">
