@@ -6,7 +6,7 @@ class Config
     public static function DB_NAME()     { return self::get_env('DB_NAME', 'web_project'); }
     public static function DB_USER()     { return self::get_env('DB_USER', 'root'); }
     public static function DB_PASSWORD() { return self::get_env('DB_PASSWORD', ''); }
-
+    public static function EXCHANGE_API_KEY() { return self::get_env('EXCHANGE_API_KEY', 'PASTE_YOUR_REAL_KEY_HERE'); }
     /**
      * Environment variables (set on the server) win over the default values above.
      */
