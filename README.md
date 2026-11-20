@@ -1,6 +1,6 @@
 # Bosnian Thrift Shop
 
-Bosnian Thrift Shop is a second-hand marketplace prototype. The frontend is static and browser-only; the PHP backend currently provides a database connection and a DAO layer, but no HTTP API or frontend-to-backend integration.
+Bosnian Thrift Shop is a second-hand marketplace prototype. The frontend is static and browser-only. The PHP backend provides a MySQL data-access layer, business services, and a FlightPHP JSON API; the frontend is not connected to the API.
 
 ## Run locally
 
@@ -15,9 +15,9 @@ You can also open `frontend/index.html` directly in a browser. Account details a
 - `frontend/index.html` - application shell and navigation
 - `frontend/views/` - shop, account, dashboard, and other routed pages
 - `frontend/assets/` and `frontend/js/` - styles, images, and browser scripts
-- `backend/` - PHP database configuration and DAO layer
+- `backend/` - PHP database configuration, DAO, services, and FlightPHP API
 - `database/web_project.sql` - MySQL schema and sample seed data
-- `docs/AI_LOG.md` - AI usage notes for Milestones 1 and 2
+- `docs/AI_LOG.md` - AI usage notes for Milestones 1, 2, and 3
 
 ## Milestone 2: Database and DAOs
 
@@ -34,6 +34,40 @@ php backend/rest/dao/test.php
 ```
 
 The script prints the return values from the six DAOs' CRUD and entity-specific read methods, then removes the linked temporary records. Password fields are redacted in printed results. It is an output example, not an assertion-based test. Database errors are reported by PHP/PDO rather than hidden.
+
+## Milestone 3: Business Logic Services
+
+The classes in `backend/rest/services/` add application validation and reusable business operations for users, categories, items, item images, orders, and reviews. Each service extends `BaseService` and is responsible for calling its DAO. Services validate required fields, formats, lengths, roles, prices, ratings, and entity relationships, and translate duplicate or missing records into the shared HTTP exceptions.
+
+FlightPHP is installed with Composer. From the repository root, install backend dependencies with:
+
+```sh
+composer install --working-dir=backend
+```
+
+The API is served from `backend/index.php`. Route declarations are split into `backend/rest/routes/UserRoutes.php`, `CategoryRoutes.php`, `ItemRoutes.php`, `ItemImageRoutes.php`, `OrderRoutes.php`, and `ReviewRoutes.php`. They expose JSON CRUD endpoints under `/users`, `/categories`, `/items`, `/item-images`, `/orders`, and `/reviews` without an `/api` prefix. Each collection supports `GET` and `POST`; each `/{id}` supports `GET`, `PUT`, `PATCH`, and `DELETE`. Entity-specific filters are available for item seller/category, images by item, orders by buyer, reviews by item, and users by email. Successful reads, updates, and deletes return `200`, creates return `201`, validation errors return `400`, authentication/authorization exceptions return `401`/`403`, missing records and endpoints return `404`, and unexpected errors return `500`, all as JSON. Unsupported methods return JSON `405`. API requests that create or update data must send a JSON object in the request body.
+
+The exchange-rate endpoint converts a BAM amount to another currency using live rates:
+
+```text
+GET /exchange-rates/convert?amount=25&to=EUR
+```
+
+Set `EXCHANGE_API_KEY` in the server environment or in `backend/config/config.php` before using this endpoint. Provider/network failures return JSON `503`; invalid input returns `400`, and unsupported currencies return `404`. The service tests use fake HTTP responses and do not require a live key:
+
+```sh
+php backend/rest/services/exchange_test.php
+```
+
+The generated OpenAPI document and Swagger UI are available at `http://localhost/web_project/backend/rest/public/v1/docs/swagger.php` and `http://localhost/web_project/backend/rest/public/v1/docs/`, respectively.
+
+The routes do not implement authentication or authorization yet; configure access controls before exposing this API beyond local development. User passwords are hashed when saved and omitted from service responses.
+
+The service tests use in-memory DAO doubles and require no database:
+
+```sh
+php backend/rest/services/test.php
+```
 
 ## Database design
 

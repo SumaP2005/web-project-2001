@@ -4,6 +4,7 @@
 # Ignore OS files
 
 /backend/vendor/
+/vendor/
 /backend/config/config.php
 .env
 /backend/logs/*.log
