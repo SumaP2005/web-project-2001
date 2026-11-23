@@ -36,3 +36,19 @@
 
 - The schema uses entity-specific primary-key columns (`user_id`, `category_id`, and so on), while the shared `BaseDao` assumes `id`. Each entity DAO keeps the base class unchanged and maps its primary key in its own CRUD methods.
 - The DAO output example requires an imported schema and valid local MySQL configuration. It prints DAO return values and cleans up its temporary records; it does not assert expected results.
+
+## Milestone 3 - Business Logic Service Layer
+
+**Scope:** Add entity service classes for users, categories, items, item images, orders, and reviews. Each service extends `BaseService`, validates application data with `Validator`, uses shared exceptions for failures, and is the only layer that calls its DAO. Entity-specific methods cover uniqueness checks and relationships between users, categories, items, orders, and reviews. Install FlightPHP through Composer and expose JSON CRUD routes for all six entities, split into per-entity route files with shared response/CRUD helpers. Map service exceptions and unexpected errors to HTTP status codes. Hash user passwords before saving and omit them from responses. Add a BAM-to-currency exchange-rate endpoint backed by ExchangeRate-API, plus generated OpenAPI documentation and Swagger UI.
+
+**AI tools used:** Copilot SDK in VS Code; workspace search, Composer, PHP syntax linting, and HTTP smoke tests.
+
+**Important prompts (summarized):**
+
+- Implement a modular service for every database entity.
+- Keep `BaseService` and utility/exception classes unchanged.
+- Add application constraints and reusable entity-specific read operations.
+- Install FlightPHP and implement JSON CRUD endpoints using the service layer.
+- Add a live exchange-rate conversion endpoint and document the API with OpenAPI.
+
+**Validation:** `php backend/rest/services/test.php` exercises service validation without MySQL; `php backend/rest/services/exchange_test.php` tests currency conversion and provider failure handling with fake HTTP responses. The route smoke checks cover route registration, malformed JSON, unknown paths, and JSON response status/content type. The API does not yet implement authentication or authorization.
